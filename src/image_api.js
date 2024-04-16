@@ -1,14 +1,27 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://api.unsplash.com"
+// axios.defaults.baseURL = "https://api.unsplash.com";
 
-export const fetchImages = async ()=> {
-    const response = axios.get("/search/photos?query=dogs", {
+
+const instance = axios.create({
+  baseURL: "https://api.unsplash.com",
+  headers: {
+    "Accept-Version": "v1",
+    "Authorization": "Client-ID ttzhhG7hqkbd8IQK8enG5op-M_TFf5hzj7ukGd_vSRU"  },
+});
+
+ export const fetchImages = async (searchQuery)=> {
+    const response = await instance.get('/search/photos', {
       params: {
+        query: searchQuery,
         page: 1,
-        per_page: 10,
-        client_id: "ttzhhG7hqkbd8IQK8enG5op-M_TFf5hzj7ukGd_vSRU",
+        per_page: 12,
+        // w: 900,
+        // h: 100,
+        // fit: "crop"
       },
     });
-    return response.results;
-}
+    return response.data.results;
+ }
+
+ 

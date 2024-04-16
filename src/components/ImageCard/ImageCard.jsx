@@ -1,8 +1,14 @@
-import '../ImageCard/ImageCard.module.css'
+import css from '../ImageCard/ImageCard.module.css'
 
-export default function ImageCard() {
-    <div>
-        <img src="" alt="" />
-    </div>
-
+export default function ImageCard({ card:
+    { urls: {
+        regular,
+        small,
+    }
+} }) {
+    return (
+        <div>
+            <img src={small} alt={regular} />
+        </div>
+    )
 }
