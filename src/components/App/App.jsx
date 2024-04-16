@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { fetchImages }  from '../../image_api.js';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import ImageGallery from '../ImageGallery/ImageGallery.jsx';
@@ -10,11 +10,10 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    async function getImages() {
+  const handleSearch = async (query) => {
       try {
         setIsLoading(true)
-        const data = await fetchImages("sexy");
+        const data = await fetchImages(query);
         setImages(data);
 
       } catch (error) {
@@ -23,14 +22,17 @@ export default function App() {
         setIsLoading(false)
       }
     }
-    getImages();
-  }, []);
+    
 
   return (
-    <div className={css.container}>
-      {isLoading && <Loader />}
-      {error && <p>Do not find images</p>}
-      {images.length>0 && <ImageGallery collection={ images} />} 
-    </div>
+    <>
+      <SearchBar onSearch={ handleSearch} />
+      <div className={css.container}>
+        {isLoading && <Loader />}
+        {error && <p>Do not find images</p>}
+        {images.length>0 && <ImageGallery collection={ images} />} 
+      </div>
+    </>
+    
   );
 }
