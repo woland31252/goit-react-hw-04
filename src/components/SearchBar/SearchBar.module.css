@@ -3,6 +3,7 @@
     margin: 0 auto;
     padding: 10px;
     text-align: center;
+    background-color: blue;
 }
 
 .form{
@@ -35,11 +36,7 @@
     stroke: darkgray;
 }
 
-/* .button:hover {
-    border-color: #0b13a5;
-} */
+.button :hover {
+    fill: blue;
+} 
 
-/* .button:focus,
-.button:focus-visible {
-    outline: 4px auto darkblue;
-} */
