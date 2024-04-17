@@ -11,7 +11,7 @@
 }
 
 .input {
-    width: 280px;
+    width: 480px;
     padding: 6px 8px 6px 40px;
     border: 2px solid darkgray;
     border-radius: 5px;
@@ -28,7 +28,7 @@
     cursor: pointer;
     /* transition: border-color 0.25s; */
     position: absolute;
-    left: 490px;
+    left: 390px;
 }
 
 .icon {
@@ -36,7 +36,8 @@
     stroke: darkgray;
 }
 
-.button :hover {
-    fill: blue;
+.icon:hover {
+    stroke: blue;
+    transition: 300ms;
 } 
 
