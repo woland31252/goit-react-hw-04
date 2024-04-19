@@ -1,17 +1,16 @@
 import { useState } from 'react';
-// import toast, { Toaster } from 'react-hot-toast';
 import { fetchImages }  from '../../image_api.js';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import ImageGallery from '../ImageGallery/ImageGallery.jsx';
 import css from './App.module.css'
 import Loader from '../Loader/Loader.jsx';
+import ErrorMessage from '../ErrorMessage/ErrorMessage.jsx';
+import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn.jsx';
 
 export default function App() {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(false);
-
-// const notify = () => toast('Please formulate your request.');
 
   const handleSearch = async (query) => {
       try {
@@ -32,10 +31,10 @@ export default function App() {
       <SearchBar onSearch={ handleSearch} />
       <div className={css.container}>
         {isLoading && <Loader />}
-        {error && <p>Do not find images</p>}
-        {images.length > 0 && <ImageGallery collection={images} />} 
-        {/* <Toaster toasty={notify} /> */}
+        {images.length > 0 && <ImageGallery collection={images} />}
+        {error && <ErrorMessage/>}
       </div>
+      {images.length > 0 && <LoadMoreBtn />}
     </>
     
   );

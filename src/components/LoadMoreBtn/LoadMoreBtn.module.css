@@ -1,0 +1,22 @@
+.loadBtnContainer {
+    text-align: center;
+    padding: 15px;
+}
+
+.loadBtn {
+    font-size: 22px;
+    color: #3a3030;
+    border: none;
+    border-radius: 8px;
+    background-color: #0c67ef;
+    padding: 8px 14px;
+}
+
+.loadBtn:hover {
+    background-color: #0ca3ef;
+    
+}
+
+.loadBtn:active {
+    background-color: #0c67ef;
+}
