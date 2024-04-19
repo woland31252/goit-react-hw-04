@@ -10,11 +10,11 @@ const instance = axios.create({
     "Authorization": "Client-ID ttzhhG7hqkbd8IQK8enG5op-M_TFf5hzj7ukGd_vSRU"  },
 });
 
- export const fetchImages = async (searchQuery)=> {
+ export const fetchImages = async (searchQuery, curentPage)=> {
     const response = await instance.get('/search/photos', {
       params: {
         query: searchQuery,
-        page: 1,
+        page: curentPage,
         per_page: 12,
         // w: 900,
         // h: 100,

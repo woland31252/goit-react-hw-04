@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchImages }  from '../../image_api.js';
 import SearchBar from '../SearchBar/SearchBar.jsx';
 import ImageGallery from '../ImageGallery/ImageGallery.jsx';
@@ -9,14 +9,33 @@ import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn.jsx';
 
 export default function App() {
   const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
 
-  const handleSearch = async (query) => {
-      try {
+  const handleSearch = async (newQuery) => {
+    setQuery(newQuery);
+    setPage(1);
+    setImages([]);
+  }
+     
+  
+  
+  const handleLoadMore = () => {
+      setPage(page+1)
+  }
+
+  useEffect(() => {
+    if (query === "") {
+      return;
+    }
+
+    async function getImages() {
+       try {
         setIsLoading(true)
-        const data = await fetchImages(query);
-        setImages(data);
+        const data = await fetchImages(query, page);
+         setImages((prevImages) => { return [...prevImages, ...data ]});
 
       } catch (error) {
         setError(true);
@@ -24,6 +43,8 @@ export default function App() {
         setIsLoading(false)
       }
     }
+    getImages()
+  }, [page, query])
     
 
   return (
@@ -34,7 +55,7 @@ export default function App() {
         {images.length > 0 && <ImageGallery collection={images} />}
         {error && <ErrorMessage/>}
       </div>
-      {images.length > 0 && <LoadMoreBtn />}
+      {images.length > 0 && !isLoading && <LoadMoreBtn onClick={ handleLoadMore} />}
     </>
     
   );
