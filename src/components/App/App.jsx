@@ -51,9 +51,9 @@ export default function App() {
     <>
       <SearchBar onSearch={ handleSearch} />
       <div className={css.container}>
-        {isLoading && <Loader />}
         {images.length > 0 && <ImageGallery collection={images} />}
-        {error && <ErrorMessage/>}
+        {error && <ErrorMessage />}
+        {isLoading && <Loader />}
       </div>
       {images.length > 0 && !isLoading && <LoadMoreBtn onClick={ handleLoadMore} />}
     </>

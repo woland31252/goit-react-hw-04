@@ -7,8 +7,8 @@ export default function ImageCard({ card:
     }
 } }) {
     return (
-        <div>
-            <img src={small} alt={regular} />
+        <div className={css.containImg}>
+            <img src={small} alt={regular} className={css.cardImg } />
         </div>
     )
 }
