@@ -12,13 +12,13 @@ const customStyles = {
   },
 };
 
-export default function ImageModal() {
+export default function ImageModal(onClick, isOpen, onAfterOpen, closeModal) {
      return (
     <div>
-      <button onClick={openModal}>Open Modal</button>
+      <button onClick>Open Modal</button>
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
+        isOpen
+        onAfterOpen=
         onRequestClose={closeModal}
         style={customStyles}
         contentLabel="Example Modal"

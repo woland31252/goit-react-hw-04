@@ -6,6 +6,7 @@ import css from './App.module.css'
 import Loader from '../Loader/Loader.jsx';
 import ErrorMessage from '../ErrorMessage/ErrorMessage.jsx';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn.jsx';
+import ImageModal from '../ImageModal/ImageModal.jsx';
 
 export default function App() {
   const [images, setImages] = useState([]);
@@ -13,6 +14,7 @@ export default function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [modalIsOpen, setIsOpen] = useState(false);
 
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
@@ -45,6 +47,22 @@ export default function App() {
     }
     getImages()
   }, [page, query])
+
+  let subtitle;
+  
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
     
 
   return (
@@ -55,7 +73,10 @@ export default function App() {
         {error && <ErrorMessage />}
         {isLoading && <Loader />}
       </div>
-      {images.length > 0 && !isLoading && <LoadMoreBtn onClick={ handleLoadMore} />}
+      {images.length > 0 && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
+      <ImageModal onClick={openModal} isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}/>
     </>
     
   );
