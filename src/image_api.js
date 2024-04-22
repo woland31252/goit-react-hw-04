@@ -16,10 +16,7 @@ const instance = axios.create({
         query: searchQuery,
         page: curentPage,
         per_page: 12,
-        // w: 900,
-        // h: 100,
-        // fit: "crop"
-      },
+        },
     });
     return response.data.results;
  }

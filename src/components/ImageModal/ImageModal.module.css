@@ -1,0 +1,17 @@
+.img {
+    width: 400px;
+    height: 600px;
+}
+
+.titleImg {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: 30px;
+}
+
+.iconModal {
+    width: 20px;
+    height: 20px;
+}
+

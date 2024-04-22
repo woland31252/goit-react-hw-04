@@ -14,7 +14,14 @@ export default function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [IsOpen, setIsOpen] = useState(false);
+  const [imgUrl, setImgsUrl] = useState([]);
+
+  const [userName, setUserName] = useState(null);
+  const [likes, setLikes] = useState(null);
+  const [twitter, setTwitter] = useState(null);
+  const [instagram, setInstagram] = useState(null)
+
 
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
@@ -48,17 +55,19 @@ export default function App() {
     getImages()
   }, [page, query])
 
-  let subtitle;
+
   
 
-  function openModal() {
+  function openModal(url, likes, userName, socTwit, socInsta) {
     setIsOpen(true);
+    setImgsUrl(url);
+    setUserName(userName);
+    setLikes(likes);
+    setTwitter(socTwit);
+    setInstagram(socInsta);
+    
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
 
   function closeModal() {
     setIsOpen(false);
@@ -69,14 +78,13 @@ export default function App() {
     <>
       <SearchBar onSearch={ handleSearch} />
       <div className={css.container}>
-        {images.length > 0 && <ImageGallery collection={images} />}
+        {images.length > 0 && <ImageGallery onClick={openModal} collection={images} />}
+        {IsOpen && <ImageModal image={imgUrl} like={likes} name={userName} twit={ twitter} insta={instagram} onOpen={openModal} onClose={closeModal} />}
         {error && <ErrorMessage />}
         {isLoading && <Loader />}
       </div>
       {images.length > 0 && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
-      <ImageModal onClick={openModal} isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}/>
+      
     </>
     
   );
