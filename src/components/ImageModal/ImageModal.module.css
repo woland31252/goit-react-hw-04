@@ -1,17 +1,42 @@
 .img {
-    width: 400px;
-    height: 600px;
+    object-fit: fill;
 }
 
 .titleImg {
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    bottom: 30px;
+    position: sticky;
+    bottom: 1px;
+    background-color: rgb(88 88 109/60%);
+    width: 100%;
+    height: 40px;
+    padding: 6px;
+    color: #c6cdd7;
+}
+
+.itemImg {
+    display: flex;
+    align-items: center;
+    gap: 4px
 }
 
 .iconModal {
     width: 20px;
     height: 20px;
+}
+
+.modalBox {
+    width: 100%;
+    height: inherit;
+    position: relative;
+    padding: 0;
+}
+
+.iconTwitColor {
+    fill: blue;
+}
+
+.iconInstColor {
+    fill: #883167;
 }
 

@@ -3,6 +3,7 @@ import { BiLogoTwitter } from "react-icons/bi";
 import { BiLogoInstagram } from "react-icons/bi";
 import { TiUser } from "react-icons/ti";
 import { FcLike } from "react-icons/fc";
+import clsx from 'clsx';
 import css from '../ImageModal/ImageModal.module.css'
 
 
@@ -19,7 +20,9 @@ const customStyles = {
     transform: 'translate(-50%, -50%)',
     padding: '4px',
     backgroundColor: 'rgb(88 88 109)',
-    borderColor: 'rgb(88 88 109)'
+    borderColor: 'rgb(88 88 109)',
+    width: '600px',
+    maxHeight: '600px'
   },
    overlay: {
     position: "fixed",
@@ -32,19 +35,24 @@ const customStyles = {
 };
 
 export default function ImageModal({ onOpen, onClose, image, like, name, twit, insta }) {
+const twitColor = clsx(css.iconModal, css.iconTwitColor)
+const instColor = clsx(css.iconModal, css.iconInstColor)
      return (
     <>
       <Modal
         isOpen={onOpen}
         onRequestClose={onClose}
-        style={customStyles}>
-           <img className={css.img} src={image} />
-           <ul className={css.titleImg}>
-             <li><TiUser className={ css.iconModal} /> {name}</li>
-             <li><FcLike /> {like}</li>
-             {twit !== null && <li><BiLogoTwitter className={ css.iconModal}/> {twit}</li>}
-             {insta !== null && <li><BiLogoInstagram className={ css.iconModal}/> {insta}</li>}
-           </ul>
+           style={customStyles}>
+           <div className={css.modalBox}>
+             <img className={css.img} src={image} />
+              <ul className={css.titleImg}>
+                <li className={css.itemImg}><TiUser className={ css.iconModal} /> {name}</li>
+                <li className={css.itemImg}><FcLike /> {like}</li>
+                {twit !== null && <li className={css.itemImg}><BiLogoTwitter className={twitColor}/> {twit}</li>}
+                {insta !== null && <li className={css.itemImg}><BiLogoInstagram className={instColor}/> {insta}</li>}
+              </ul>
+           </div>
+           
       </Modal>
     </>
   );

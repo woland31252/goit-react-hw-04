@@ -79,12 +79,11 @@ export default function App() {
       <SearchBar onSearch={ handleSearch} />
       <div className={css.container}>
         {images.length > 0 && <ImageGallery onClick={openModal} collection={images} />}
-        {IsOpen && <ImageModal image={imgUrl} like={likes} name={userName} twit={ twitter} insta={instagram} onOpen={openModal} onClose={closeModal} />}
         {error && <ErrorMessage />}
         {isLoading && <Loader />}
       </div>
       {images.length > 0 && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
-      
+      <ImageModal image={imgUrl} like={likes} name={userName} twit={ twitter} insta={instagram} onOpen={IsOpen} onClose={closeModal} />
     </>
     
   );
