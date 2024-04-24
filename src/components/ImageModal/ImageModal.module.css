@@ -1,5 +1,6 @@
-.img {
+.imgModal {
     object-fit: fill;
+    max-width: 100%;
 }
 
 .titleImg {

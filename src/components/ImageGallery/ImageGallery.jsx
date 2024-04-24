@@ -7,6 +7,7 @@ export default function ImageGallery({ collection, onClick}) {
             {collection.map(collElem => (<li className={css.galleryItem} key={collElem.id}>
             <ImageCard onClick={onClick} card={collElem} /></li>))}
         </ul>
+    
    ) 
     
 }

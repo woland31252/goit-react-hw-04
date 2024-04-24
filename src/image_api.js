@@ -18,7 +18,7 @@ const instance = axios.create({
         per_page: 12,
         },
     });
-    return response.data.results;
+    return response.data;
  }
 
  

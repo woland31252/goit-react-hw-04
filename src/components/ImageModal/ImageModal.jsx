@@ -44,7 +44,7 @@ const instColor = clsx(css.iconModal, css.iconInstColor)
         onRequestClose={onClose}
            style={customStyles}>
            <div className={css.modalBox}>
-             <img className={css.img} src={image} />
+             <img className={css.imgModal} src={image} />
               <ul className={css.titleImg}>
                 <li className={css.itemImg}><TiUser className={ css.iconModal} /> {name}</li>
                 <li className={css.itemImg}><FcLike /> {like}</li>

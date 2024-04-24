@@ -7,6 +7,7 @@ import Loader from '../Loader/Loader.jsx';
 import ErrorMessage from '../ErrorMessage/ErrorMessage.jsx';
 import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn.jsx';
 import ImageModal from '../ImageModal/ImageModal.jsx';
+import NotFound from '../NotFound/NotFound.jsx';
 
 export default function App() {
   const [images, setImages] = useState([]);
@@ -16,12 +17,15 @@ export default function App() {
   const [query, setQuery] = useState("");
   const [IsOpen, setIsOpen] = useState(false);
   const [imgUrl, setImgsUrl] = useState([]);
-
+  const [showBtn, setShowBtn] = useState(false)
   const [userName, setUserName] = useState(null);
   const [likes, setLikes] = useState(null);
   const [twitter, setTwitter] = useState(null);
-  const [instagram, setInstagram] = useState(null)
+  const [instagram, setInstagram] = useState(null);
+  const [notFound, setNotFound] = useState(false);
+  
 
+  
 
   const handleSearch = async (newQuery) => {
     setQuery(newQuery);
@@ -40,12 +44,17 @@ export default function App() {
       return;
     }
 
+  
+    
     async function getImages() {
        try {
         setIsLoading(true)
-        const data = await fetchImages(query, page);
-         setImages((prevImages) => { return [...prevImages, ...data ]});
-
+         const data = await fetchImages(query, page);
+         const curentImages = data.results;
+         setImages((prevImages) => { return [...prevImages, ...curentImages] });
+         const totalPages = data.total_pages;
+         setShowBtn(totalPages && totalPages !== page);
+         setNotFound(curentImages.length === 0)
       } catch (error) {
         setError(true);
       } finally {
@@ -81,8 +90,9 @@ export default function App() {
         {images.length > 0 && <ImageGallery onClick={openModal} collection={images} />}
         {error && <ErrorMessage />}
         {isLoading && <Loader />}
+        {notFound && <NotFound />}
       </div>
-      {images.length > 0 && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
+      {images.length>0 && showBtn && !isLoading && <LoadMoreBtn onClick={handleLoadMore} />}
       <ImageModal image={imgUrl} like={likes} name={userName} twit={ twitter} insta={instagram} onOpen={IsOpen} onClose={closeModal} />
     </>
     
