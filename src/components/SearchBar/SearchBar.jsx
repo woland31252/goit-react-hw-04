@@ -1,5 +1,4 @@
 import { Field, Form, Formik} from "formik";
-// import * as Yup from 'yup';
 import toast, { Toaster } from 'react-hot-toast';
 import { SlMagnifier } from "react-icons/sl";
 import { useId } from "react";
