@@ -1,8 +1,5 @@
 import axios from "axios";
 
-// axios.defaults.baseURL = "https://api.unsplash.com";
-
-
 const instance = axios.create({
   baseURL: "https://api.unsplash.com",
   headers: {
